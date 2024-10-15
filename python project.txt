@@ -1,0 +1,54 @@
+class Job:
+    def _init_(self, id, title, description):
+        self.id = id
+        self.title = title
+        self.description = description
+
+class JobPortal:
+    def _init_(self):
+        self.jobs = []
+
+    def add_job(self, job):
+        self.jobs.append(job)
+
+    def display_jobs(self):
+        for job in self.jobs:
+            print(f"ID: {job.id}, Title: {job.title}, Description: {job.description}")
+
+    def apply_for_job(self, job_id, applicant):
+        job = next((job for job in self.jobs if job.id == job_id), None)
+        if job:
+            print(f"Applicant {applicant} applied for job '{job.title}'")
+        else:
+            print("Job not found")
+
+def main():
+    portal = JobPortal()
+
+    # Adding sample jobs
+    portal.add_job(Job(1, "Software Engineer", "Developing software applications"))
+    portal.add_job(Job(2, "Data Scientist", "Analyzing and interpreting complex data sets"))
+    portal.add_job(Job(3, "Web Developer", "Building websites and web applications"))
+
+    while True:
+        print("\nOnline Job Portal")
+        print("1. View Jobs")
+        print("2. Apply for Job")
+        print("3. Exit")
+
+        choice = input("Enter your choice: ")
+
+        if choice == '1':
+            portal.display_jobs()
+        elif choice == '2':
+            job_id = int(input("Enter the job ID you want to apply for: "))
+            applicant_name = input("Enter your name: ")
+            portal.apply_for_job(job_id, applicant_name)
+        elif choice == '3':
+            print("Exiting...")
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+if _name_ == "_main_":
+    main()
